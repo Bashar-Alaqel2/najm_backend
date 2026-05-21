@@ -16,7 +16,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (Throwable $e) {
-            if (isset($_ENV['VERCEL_URL']) || isset($_SERVER['VERCEL_URL'])) {
+            if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
                 header('Content-Type: application/json');
                 http_response_code(500);
                 echo json_encode([
@@ -31,7 +31,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
     })->create();
 
 // Override storage path to /tmp for Vercel serverless environment
-if (isset($_ENV['VERCEL_URL']) || isset($_SERVER['VERCEL_URL'])) {
+if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
     $app->useStoragePath('/tmp');
     
     // Ensure required storage directories exist in /tmp
