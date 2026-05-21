@@ -19,31 +19,33 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 
+// Publicly accessible for UI testing
+Route::get('/employees', [EmployeeController::class, 'index']);
+Route::get('/roles', [RoleController::class, 'index']);
+Route::get('/departments', [DepartmentController::class, 'index']);
+Route::get('/job-titles', [JobTitleController::class, 'index']);
+
 // We wrap the rest in auth:sanctum (can be removed temporarily for testing)
 Route::middleware('auth:sanctum')->group(function () {
     
     // 2. Employees Routes
-    Route::get('/employees', [EmployeeController::class, 'index']);
     Route::post('/employees', [EmployeeController::class, 'store']);
     Route::get('/employees/{id}', [EmployeeController::class, 'show']);
     Route::put('/employees/{id}', [EmployeeController::class, 'update']);
     Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
 
     // Roles & Operations Management
-    Route::get('/roles', [RoleController::class, 'index']);
     Route::post('/roles', [RoleController::class, 'store']);
     Route::get('/roles/{id}/permissions', [RoleController::class, 'getPermissions']);
     Route::post('/roles/{id}/permissions', [RoleController::class, 'savePermissions']);
     Route::get('/employees/{id}', [EmployeeController::class, 'show']);
 
     // 2.1 Departments Routes
-    Route::get('/departments', [DepartmentController::class, 'index']);
     Route::post('/departments', [DepartmentController::class, 'store']);
     Route::put('/departments/{id}', [DepartmentController::class, 'update']);
     Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
 
     // 2.2 Job Titles Routes
-    Route::get('/job-titles', [JobTitleController::class, 'index']);
     Route::post('/job-titles', [JobTitleController::class, 'store']);
     Route::put('/job-titles/{id}', [JobTitleController::class, 'update']);
     Route::delete('/job-titles/{id}', [JobTitleController::class, 'destroy']);
