@@ -26,7 +26,7 @@ Route::get('/departments', [DepartmentController::class, 'index']);
 Route::get('/job-titles', [JobTitleController::class, 'index']);
 
 // We wrap the rest in auth:sanctum (can be removed temporarily for testing)
-Route::middleware('auth:sanctum')->group(function () {
+// Route::middleware('auth:sanctum')->group(function () {
     
     // 2. Employees Routes
     Route::post('/employees', [EmployeeController::class, 'store']);
@@ -78,4 +78,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/maintenance-requests/{id}/execute-purchase', [MaintenanceController::class, 'executePurchase']);
     Route::post('/maintenance-requests/{id}/verify-gate', [MaintenanceController::class, 'verifyAtGate']);
     Route::post('/maintenance-requests/{id}/confirm-receipt', [MaintenanceController::class, 'confirmReceipt']);
-});
+// });
