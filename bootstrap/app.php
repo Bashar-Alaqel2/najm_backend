@@ -17,12 +17,15 @@ $app = Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (Throwable $e) {
             if (isset($_ENV['VERCEL_URL']) || isset($_SERVER['VERCEL_URL'])) {
-                return response()->json([
+                header('Content-Type: application/json');
+                http_response_code(500);
+                echo json_encode([
                     'error' => $e->getMessage(),
                     'file' => $e->getFile(),
                     'line' => $e->getLine(),
                     'trace' => $e->getTraceAsString(),
-                ], 500);
+                ]);
+                exit;
             }
         });
     })->create();
