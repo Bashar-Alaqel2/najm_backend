@@ -58,9 +58,6 @@ class EmployeeController extends Controller
                 'role_id' => $validated['role_id'],
             ]);
 
-            // Optional: link user_id back to employee if needed
-            $employee->user_id = $user->id;
-            $employee->save();
 
             DB::commit();
 
