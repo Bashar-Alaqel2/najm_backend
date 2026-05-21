@@ -24,6 +24,7 @@ class Employee extends Model
         'status',
         'supervisor_id',
         'gate_registered_by',
+        'photo',
     ];
 
     public function user()

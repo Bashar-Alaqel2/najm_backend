@@ -33,6 +33,7 @@ class EmployeeController extends Controller
             'department_id' => 'required|exists:departments,id',
             'job_title_id' => 'required|exists:job_titles,id',
             'status' => 'nullable|string',
+            'photo' => 'nullable|string',
         ]);
 
         DB::beginTransaction();
@@ -44,7 +45,8 @@ class EmployeeController extends Controller
                 'phone' => $validated['phone'],
                 'department_id' => $validated['department_id'],
                 'job_title_id' => $validated['job_title_id'],
-                'status' => $validated['status'] ?? 'نشط',
+                'status' => $validated['status'] ?? 'active',
+                'photo' => $validated['photo'] ?? null,
             ]);
 
             // 2. Create User Account
@@ -85,6 +87,7 @@ class EmployeeController extends Controller
             'department_id' => 'sometimes|exists:departments,id',
             'job_title_id' => 'sometimes|exists:job_titles,id',
             'status' => 'nullable|string',
+            'photo' => 'nullable|string',
         ]);
 
         DB::beginTransaction();
